@@ -21,11 +21,6 @@ class Meeting:
 
                 self.meeting_id = config["meeting_id"]
                 self.password = config["password"]
-
-            print(
-                "config: valid\n"
-                "Trying to join meeting..."
-            )
         except:
             print(
                 "Please create a valid config file in order to join a meeting.\n"
@@ -33,6 +28,12 @@ class Meeting:
                 "Exiting..."
             )
             sys.exit(1)
+
+        print(
+            "config: valid\n"
+            "Trying to join meeting..."
+        )
+
 
 if __name__ == "__main__":
     meeting = Meeting()
