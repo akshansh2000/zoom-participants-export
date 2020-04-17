@@ -2,6 +2,8 @@ from selenium import webdriver
 import sys
 import json
 import csv
+import random
+import string
 
 
 class Meeting:
@@ -16,6 +18,9 @@ class Meeting:
         """
 
         super().__init__()
+
+        self.email = "thisisalsounique@tutanota.com"
+        self.password = "thisisforTutanota@283"
 
         try:
             with open("config.json", "r") as config:
@@ -47,6 +52,7 @@ class Meeting:
         options.headless = True
 
         self.driver = webdriver.Chrome(options=options)
+        self.driver.implicitly_wait(10)
 
     def try_to_join(self):
         """
@@ -56,14 +62,26 @@ class Meeting:
 
         self.driver.get(self.meeting_url)
 
-        while True:
-            try:
-                self.driver.switch_to.alert.dismiss()
-            except:
-                break
-            
         join_from_browser_link = self.driver.find_element_by_xpath(
             "//div[@class='desc24 webclient hideme']//a"
         ).get_attribute("href")
-        
+
         self.driver.get(join_from_browser_link)
+
+        self.driver.find_element_by_id("email").send_keys(self.email)
+        self.driver.find_element_by_id("password").send_keys(self.password)
+
+        self.driver.find_element_by_xpath("//div[@class='signin']").click()
+
+        self.random_hash = ''.join(
+            random.choices(
+                string.ascii_letters + string.digits,
+                k=16,
+            )
+        )
+
+        self.driver.find_element_by_id("inputname").clear()
+        self.driver.find_element_by_id("inputname").send_keys(self.random_hash)
+        self.driver.find_element_by_id("joinBtn").click()
+
+        print("Meeting joined!")
