@@ -54,4 +54,16 @@ class Meeting:
         ! Raises exception if meeting data invalid
         """
 
-        driver.get(self.meeting_url)
+        self.driver.get(self.meeting_url)
+
+        while True:
+            try:
+                self.driver.switch_to.alert.dismiss()
+            except:
+                break
+            
+        join_from_browser_link = self.driver.find_element_by_xpath(
+            "//div[@class='desc24 webclient hideme']//a"
+        ).get_attribute("href")
+        
+        self.driver.get(join_from_browser_link)
