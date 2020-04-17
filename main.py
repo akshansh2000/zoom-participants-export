@@ -34,6 +34,18 @@ class Meeting:
             "Trying to join meeting..."
         )
 
+    def init_driver(self):
+        options = webdriver.ChromeOptions()
+        options.headless = True
+
+        self.driver = webdriver.Chrome(options=options)
+
+    def try_to_join(self):
+        pass
+
 
 if __name__ == "__main__":
     meeting = Meeting()
+
+    meeting.init_driver()
+    meeting.try_to_join()
