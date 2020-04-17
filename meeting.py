@@ -6,10 +6,15 @@ import csv
 
 class Meeting:
     """
-    ? Stores all the meeting data and houses the meeting functions
+    * Stores all the meeting data and houses the meeting functions
     """
 
     def __init__(self):
+        """
+        * Reads the config file and imports meeting data
+        ! Raises exception in case of no file found / invalid file
+        """
+
         super().__init__()
 
         try:
@@ -35,10 +40,19 @@ class Meeting:
         )
 
     def init_driver(self):
+        """
+        * Initialises webdriver and sets options for headless Chrome
+        """
+
         options = webdriver.ChromeOptions()
         options.headless = True
 
         self.driver = webdriver.Chrome(options=options)
 
     def try_to_join(self):
+        """
+        * Tries to join meeting as per meeting data
+        ! Raises exception if meeting data invalid
+        """
+
         pass
