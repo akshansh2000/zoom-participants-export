@@ -33,3 +33,6 @@ class Meeting:
                 "Exiting..."
             )
             sys.exit(1)
+
+if __name__ == "__main__":
+    meeting = Meeting()
