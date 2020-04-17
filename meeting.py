@@ -21,11 +21,10 @@ class Meeting:
             with open("config.json", "r") as config:
                 config = json.load(config)
 
-                if not {"meeting_id", "password"}.issubset(set(config.keys())):
+                if not "meeting_url" in config.keys():
                     raise Exception()
 
-                self.meeting_id = config["meeting_id"]
-                self.password = config["password"]
+                self.meeting_url = config["meeting_url"]
         except:
             print(
                 "Please create a valid config file in order to join a meeting.\n"
@@ -55,4 +54,4 @@ class Meeting:
         ! Raises exception if meeting data invalid
         """
 
-        pass
+        driver.get(self.meeting_url)
