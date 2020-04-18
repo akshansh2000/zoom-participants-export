@@ -4,6 +4,7 @@ import json
 import csv
 import random
 import string
+import time
 
 
 class Meeting:
@@ -26,10 +27,11 @@ class Meeting:
             with open("config.json", "r") as config:
                 config = json.load(config)
 
-                if not "meeting_url" in config.keys():
+                if not {"meeting_url", "sleep_time"}.issubset(set(config.keys())):
                     raise Exception()
 
                 self.meeting_url = config["meeting_url"]
+                self.sleep_time = config["sleep_time"]
         except:
             print(
                 "Please create a valid config file in order to join a meeting.\n"
@@ -84,4 +86,39 @@ class Meeting:
         self.driver.find_element_by_id("inputname").send_keys(self.random_hash)
         self.driver.find_element_by_id("joinBtn").click()
 
-        print("Meeting joined!")
+        print(
+            "Meeting joined!\n"
+            "Collecting participants..."
+        )
+
+    def get_participants_list(self):
+        """
+        * Collects participants and exports them to a CSV
+        ! Might raise an exception if the internet is slow
+        """
+
+        # * Sleep for a while in order to wait for the partipants list to load
+        # ? Any better alternative
+        time.sleep(self.sleep_time)
+
+        self.driver.find_elements_by_class_name(
+            "footer-button__button.ax-outline"
+        )[0].click()
+
+        partipants_list = [name.text for name in self.driver.find_elements_by_class_name(
+            "participants-item__display-name"
+        ) if name.text != self.random_hash]
+
+        if not partipants_list:
+            print(
+                "Something went wrong. Perhaps your internet is slow?\n"
+                "Try increasing the sleep time in the config.\n"
+                "Read the README for more instructions.\n"
+                "Exiting..."
+            )
+            sys.exit(1)
+
+        print(
+            "Partipants collected!\n"
+            "Leaving meeting..."
+        )
