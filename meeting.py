@@ -55,6 +55,7 @@ class Meeting:
 
         self.driver = webdriver.Chrome(options=options)
         self.driver.implicitly_wait(10)
+        self.driver.set_window_size(1920, 1080)
 
     def try_to_join(self):
         """
@@ -105,11 +106,11 @@ class Meeting:
             "footer-button__button.ax-outline"
         )[0].click()
 
-        partipants_list = [name.text for name in self.driver.find_elements_by_class_name(
+        self.partipants_list = [name.text for name in self.driver.find_elements_by_class_name(
             "participants-item__display-name"
         ) if name.text != self.random_hash]
 
-        if not partipants_list:
+        if not self.partipants_list:
             print(
                 "Something went wrong. Perhaps your internet is slow?\n"
                 "Try increasing the sleep time in the config.\n"
@@ -121,4 +122,21 @@ class Meeting:
         print(
             "Partipants collected!\n"
             "Leaving meeting..."
+        )
+
+    def leave_meeting(self):
+        """
+        * Leaves the ongoing meeting and closes the browser window
+        """
+
+        self.driver.find_element_by_class_name(
+            "footer__leave-btn.ax-outline"
+        ).click()
+        self.driver.find_element_by_class_name(
+            "zm-btn.zm-btn-legacy.zm-btn--primary.zm-btn__outline--blue"
+        ).click()
+
+        print(
+            "Left meeting!\n"
+            "Exporting data..."
         )
