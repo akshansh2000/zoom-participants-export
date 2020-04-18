@@ -8,6 +8,7 @@ def main():
     meeting.try_to_join()
     meeting.get_participants_list()
     meeting.leave_meeting()
+    meeting.export_data()
 
 
 if __name__ == "__main__":

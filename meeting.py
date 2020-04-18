@@ -136,7 +136,25 @@ class Meeting:
             "zm-btn.zm-btn-legacy.zm-btn--primary.zm-btn__outline--blue"
         ).click()
 
+        self.driver.close()
+
         print(
             "Left meeting!\n"
             "Exporting data..."
+        )
+
+    def export_data(self):
+        """
+        * Exports data to a 'participants.csv' file
+        """
+
+        with open("participants.csv", "w+", newline='') as output_file:
+            csv_writer = csv.writer(output_file, delimiter=' ')
+
+            for name in self.partipants_list:
+                csv_writer.writerow([name])
+
+        print(
+            "Data exported!\n"
+            "Exiting..."
         )
