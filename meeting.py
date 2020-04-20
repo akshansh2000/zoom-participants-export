@@ -106,9 +106,12 @@ class Meeting:
             "footer-button__button.ax-outline"
         )[0].click()
 
-        self.partipants_list = [name.text for name in self.driver.find_elements_by_class_name(
-            "participants-item__display-name"
-        ) if name.text != self.random_hash]
+        self.partipants_list = [
+            name.get_attribute("aria-label").split()
+            for name in self.driver.find_elements_by_class_name(
+                "item-pos.participants-li"
+            )
+        ]
 
         if not self.partipants_list:
             print(
@@ -151,8 +154,11 @@ class Meeting:
         with open("participants.csv", "w+", newline='') as output_file:
             csv_writer = csv.writer(output_file, delimiter=' ')
 
-            for name in self.partipants_list:
-                csv_writer.writerow([name])
+            for idx, row in enumerate(self.partipants_list):
+                self.partipants_list[idx] = row[0: row.index("audio") - 1]
+
+                if self.partipants_list[idx][-1] not in ["(Me)", "(Host)"]:
+                    csv_writer.writerow(self.partipants_list[idx])
 
         print(
             "Data exported!\n"
