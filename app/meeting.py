@@ -5,6 +5,7 @@ import csv
 import random
 import string
 import time
+import os
 
 
 class Meeting:
@@ -34,8 +35,12 @@ class Meeting:
 
         options = webdriver.ChromeOptions()
         options.headless = True
+        options.binary_location = os.environ["GOOGLE_CHROME_BIN"]
 
-        self.driver = webdriver.Chrome(options=options)
+        self.driver = webdriver.Chrome(
+            options=options,
+            executable_path="/app/.chromedriver/bin/chromedriver",
+        )
         self.driver.implicitly_wait(self.sleep_time)
         self.driver.set_window_size(3840, 2160)
 
