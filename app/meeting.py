@@ -39,7 +39,7 @@ class Meeting:
 
         self.driver = webdriver.Chrome(
             options=options,
-            executable_path="/app/.chromedriver/bin/chromedriver",
+            # executable_path="/app/.chromedriver/bin/chromedriver",
         )
         self.driver.implicitly_wait(self.sleep_time)
         self.driver.set_window_size(3840, 2160)
