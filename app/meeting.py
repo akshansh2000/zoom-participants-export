@@ -38,6 +38,7 @@ class Meeting:
         options.binary_location = os.environ["GOOGLE_CHROME_BIN"]
         options.add_argument('--disable-gpu')
         options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
 
         self.driver = webdriver.Chrome(options=options)
         self.driver.implicitly_wait(self.sleep_time)
