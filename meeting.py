@@ -12,7 +12,7 @@ class Meeting:
     * Stores all the meeting data and houses the meeting functions
     """
 
-    def __init__(self):
+    def __init__(self, meeting_url):
         """
         * Reads the config file and imports meeting data
         ! Raises exception in case of no file found / invalid file
@@ -22,28 +22,11 @@ class Meeting:
 
         self.email = "thisisalsounique@tutanota.com"
         self.password = "thisisforTutanota@283"
+        self.sleep_time = 12
+        self.meeting_url = meeting_url
 
-        try:
-            with open("config.json", "r") as config:
-                config = json.load(config)
-
-                if not {"meeting_url", "sleep_time"}.issubset(set(config.keys())):
-                    raise Exception()
-
-                self.meeting_url = config["meeting_url"]
-                self.sleep_time = config["sleep_time"]
-        except:
-            print(
-                "Please create a valid config file in order to join a meeting.\n"
-                "Read the README for more instructions.\n"
-                "Exiting..."
-            )
-            sys.exit(1)
-
-        print(
-            "config: valid\n"
-            "Trying to join meeting..."
-        )
+        print("Trying to join meeting...")
+        self.init_driver()
 
     def init_driver(self):
         """
@@ -54,7 +37,7 @@ class Meeting:
         options.headless = True
 
         self.driver = webdriver.Chrome(options=options)
-        self.driver.implicitly_wait(10)
+        self.driver.implicitly_wait(self.sleep_time)
         self.driver.set_window_size(1920, 1080)
 
     def try_to_join(self):
