@@ -25,7 +25,6 @@ class Meeting:
         self.sleep_time = 12
         self.meeting_url = meeting_url
 
-        print("Trying to join meeting...")
         self.init_driver()
 
     def init_driver(self):
@@ -70,11 +69,6 @@ class Meeting:
         self.driver.find_element_by_id("inputname").send_keys(self.random_hash)
         self.driver.find_element_by_id("joinBtn").click()
 
-        print(
-            "Meeting joined!\n"
-            "Collecting participants..."
-        )
-
     def get_participants_list(self):
         """
         * Collects participants and exports them to a CSV
@@ -97,18 +91,7 @@ class Meeting:
         ]
 
         if not self.partipants_list:
-            print(
-                "Something went wrong. Perhaps your internet is slow?\n"
-                "Try increasing the sleep time in the config.\n"
-                "Read the README for more instructions.\n"
-                "Exiting..."
-            )
             sys.exit(1)
-
-        print(
-            "Partipants collected!\n"
-            "Leaving meeting..."
-        )
 
     def leave_meeting(self):
         """
@@ -123,11 +106,6 @@ class Meeting:
         ).click()
 
         self.driver.close()
-
-        print(
-            "Left meeting!\n"
-            "Exporting data..."
-        )
 
     def export_data(self):
         """
@@ -145,8 +123,3 @@ class Meeting:
             for idx, row in enumerate(self.partipants_list):
                 if self.partipants_list[idx][-1] not in ["(Me)", "(Host)"]:
                     csv_writer.writerow(self.partipants_list[idx])
-
-        print(
-            "Data exported!\n"
-            "Exiting..."
-        )
