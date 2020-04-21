@@ -1,0 +1,71 @@
+<html>
+  <style>
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      background-color: #4caf50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    div {
+      border-radius: 15px;
+      background-color: #dddddd;
+      padding: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    ::placeholder {
+      color: #00000050;
+    }
+
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      font-size: x-large;
+    }
+  </style>
+  <head>
+    <title>Zoom Participants Export</title>
+  </head>
+  <body>
+    <div>
+      <form>
+        <label for="meeting_url">Enter Meeting URL</label>
+        <input
+          type="text"
+          id="meeting_url"
+          name="meeting_url"
+          placeholder="example: https://us04web.zoom.us/j/123456789?pwd=abc123"
+        />
+        <input type="submit" value="Export Attendance" />
+      </form>
+    </div>
+  </body>
+  <p class="footer">© Akshansh Bhanjana</p>
+</html>
