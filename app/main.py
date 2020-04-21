@@ -1,5 +1,6 @@
 from app.meeting import Meeting
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_file, Response
+import datetime
 
 app = Flask(__name__)
 
@@ -18,4 +19,13 @@ def start_export():
     meeting.try_to_join()
     meeting.get_participants_list()
     meeting.leave_meeting()
-    meeting.export_data()
+
+    return Response(
+        meeting.export_data(),
+        mimetype="text/csv",
+        headers={
+            "Content-disposition": "attachment; filename=Attendance-{}.csv".format(
+                datetime.datetime.now().strftime("%d/%m/%y-%H:%M")
+            )
+        },
+    )

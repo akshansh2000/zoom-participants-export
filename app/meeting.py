@@ -112,14 +112,14 @@ class Meeting:
         * Exports data to a 'participants.csv' file
         """
 
-        with open("participants.csv", "w+", newline='') as output_file:
-            csv_writer = csv.writer(output_file, delimiter=' ')
+        for idx, row in enumerate(self.partipants_list):
+            self.partipants_list[idx] = row[0: row.index("audio") - 1]
 
-            for idx, row in enumerate(self.partipants_list):
-                self.partipants_list[idx] = row[0: row.index("audio") - 1]
+        self.partipants_list.sort()
 
-            self.partipants_list.sort()
+        return_object = ""
+        for idx, row in enumerate(self.partipants_list):
+            if row[-1] not in ["(Me)", "(Host)"]:
+                return_object += " ".join(row) + "\n"
 
-            for idx, row in enumerate(self.partipants_list):
-                if self.partipants_list[idx][-1] not in ["(Me)", "(Host)"]:
-                    csv_writer.writerow(self.partipants_list[idx])
+        return return_object
