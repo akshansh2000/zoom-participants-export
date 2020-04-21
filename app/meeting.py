@@ -36,11 +36,10 @@ class Meeting:
         options = webdriver.ChromeOptions()
         options.headless = True
         options.binary_location = os.environ["GOOGLE_CHROME_BIN"]
+        options.add_argument('--disable-gpu')
+        options.add_argument('--no-sandbox')
 
-        self.driver = webdriver.Chrome(
-            options=options,
-            # executable_path="/app/.chromedriver/bin/chromedriver",
-        )
+        self.driver = webdriver.Chrome(options=options)
         self.driver.implicitly_wait(self.sleep_time)
         self.driver.set_window_size(3840, 2160)
 
