@@ -11,7 +11,7 @@
       box-sizing: border-box;
     }
 
-    input[type="submit"] {
+    input[type="button"] {
       width: 100%;
       background-color: #4caf50;
       color: white;
@@ -22,7 +22,7 @@
       cursor: pointer;
     }
 
-    input[type="submit"]:hover {
+    input[type="button"]:hover {
       background-color: #45a049;
     }
 
@@ -49,13 +49,45 @@
       text-align: center;
       font-size: x-large;
     }
+
+    .status {
+      text-align: center;
+      padding-top: 30px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 30px;
+      background-color: #dddddd;
+      border-radius: 15px;
+      opacity: 0;
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
   </style>
   <head>
     <title>Zoom Attendance</title>
+    <script type="text/javascript">
+      function updateStatus() {
+        document.getElementById("status").style.opacity = "1";
+
+        if (
+          !document
+            .getElementById("meeting_url")
+            .value.match(
+              /https:\/\/us04web.zoom.us\/j\/\d{9,11}\?pwd=.{10,}/g
+            )
+        ) {
+          document.getElementById("status").innerText =
+            "Please enter a valid link.";
+        } else {
+          document.getElementById("status").innerHTML =
+            "Trying to fetch attendance. This might take a couple of minutes. Please wait...";
+          document.getElementById("form").submit();
+        }
+      }
+    </script>
   </head>
   <body>
     <div>
-      <form method="POST">
+      <form method="POST" id="form">
         <label for="meeting_url">Enter Meeting URL</label>
         <input
           type="text"
@@ -63,9 +95,14 @@
           name="meeting_url"
           placeholder="example: https://us04web.zoom.us/j/123456789?pwd=abc123"
         />
-        <input type="submit" value="Export Attendance" />
+        <input
+          type="button"
+          value="Export Attendance"
+          onclick="updateStatus()"
+        />
       </form>
     </div>
+    <p id="status" class="status"></span>
   </body>
   <p class="footer">© Akshansh Bhanjana</p>
 </html>
