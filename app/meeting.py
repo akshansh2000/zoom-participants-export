@@ -37,7 +37,7 @@ class Meeting:
 
         self.driver = webdriver.Chrome(options=options)
         self.driver.implicitly_wait(self.sleep_time)
-        self.driver.set_window_size(1920, 1080)
+        self.driver.set_window_size(3840, 2160)
 
     def try_to_join(self):
         """
