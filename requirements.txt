@@ -1,5 +1,11 @@
+bottle==0.12.18
+bottle-websocket==0.2.9
 click==7.1.1
 Flask==1.1.2
+future==0.18.2
+gevent==1.5.0
+gevent-websocket==0.10.1
+greenlet==0.4.15
 gunicorn==20.0.4
 itsdangerous==1.1.0
 Jinja2==2.11.2
@@ -7,3 +13,4 @@ MarkupSafe==1.1.1
 selenium==3.141.0
 urllib3==1.25.9
 Werkzeug==1.0.1
+whichcraft==0.6.1
