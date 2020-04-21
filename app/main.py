@@ -1,4 +1,4 @@
-from meeting import Meeting
+from app.meeting import Meeting
 from flask import Flask, request, render_template
 
 app = Flask(__name__)
