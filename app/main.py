@@ -1,6 +1,10 @@
 from meeting import Meeting
+from flask import Flask
+
+app = Flask(__name__)
 
 
+@app.route("/")
 def main():
     meeting = Meeting()
 
@@ -9,7 +13,3 @@ def main():
     meeting.get_participants_list()
     meeting.leave_meeting()
     meeting.export_data()
-
-
-if __name__ == "__main__":
-    main()
