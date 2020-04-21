@@ -5,8 +5,14 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def main():
-    meeting = Meeting()
+def landing_page():
+    return render_template("index.html")
+
+
+@app.route("/", methods=["POST"])
+def start_export():
+    meeting_url = request.form["meeting_url"]
+    meeting = Meeting(meeting_url)
 
     meeting.init_driver()
     meeting.try_to_join()
