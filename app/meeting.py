@@ -40,7 +40,10 @@ class Meeting:
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
 
-        self.driver = webdriver.Chrome(options=options)
+        self.driver = webdriver.Remote(
+            command_executor="http://127.0.0.1:9515",
+            options=options,
+        )
         self.driver.implicitly_wait(self.sleep_time)
         self.driver.set_window_size(3840, 2160)
 
