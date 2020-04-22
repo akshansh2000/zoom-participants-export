@@ -1,38 +1,20 @@
 # Zoom Participants Export
 
-A Python script which exports the names of participants from a Zoom meeting, given the meeting URL.
+A web-app written in Flask which exports the names of participants from a Zoom meeting, given the meeting URL.
+
+The web-app is hosted at: https://zoom-attendance.herokuapp.com/
 
 # Prerequisites
 
-- Make sure to have a valid [Chrome WebDriver](https://chromedriver.chromium.org/) installed.
-- Make sure to have [selenium](https://pypi.org/project/selenium/) installed.
+- Make sure to **turn off** the waiting room prior to using the app
+- Make sure the meeting is still **in progress**, and is **not** locked
 
 # Instructions
 
-- Clone and navigate into the repository directory:
+- Visit the [web-app](https://zoom-attendance.herokuapp.com/) using any browser
+- Paste the **Meeting Invitation URL** in the text field
+- Click on `Export Attendance`
 
-```bash
-git clone https://github.com/akshansh2000/zoom-participants-export.git
-cd zoom-participants-export/
-```
+The process could take a couple of minutes. The browser will prompt you to download the attendance as a **CSV** file post the extraction.
 
-- Create a `config.json` file containing your **Zoom meeting URL** and a **sleep time**. A sample `config.json` is given:
-
-```json
-{
-  "meeting_url": "<Meeting URL goes here>",
-  "sleep_time": 10
-}
-```
-
-_Note: Do not worry about the `sleep_time` initially. Try running the script first. If it shows a `sleep_time error`, it might mean that your internet connection is slow. Try increasing the `sleep_time` by a couple of seconds, then._
-
-A `config.json` file has been included in the repository for testing. Feel free to edit it.
-
-- Run the script:
-
-```bash
-python3 main.py
-```
-
-### If everything went perfectly, an output file should now be available as `participants.csv` in the same directory.
+### If you intend to run it locally instead, go to the [local-tool](https://github.com/akshansh2000/zoom-participants-export/tree/local-tool) branch
