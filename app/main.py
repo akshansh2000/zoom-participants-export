@@ -24,8 +24,11 @@ def start_export():
         meeting.export_data(),
         mimetype="text/csv",
         headers={
-            "Content-disposition": "attachment; filename=Attendance-{}.csv".format(
-                datetime.datetime.now().strftime("%d/%m/%y-%H:%M")
-            )
+            "Content-disposition": "attachment; filename=Attendance-{}.csv".format((
+                datetime.datetime.now() + datetime.timedelta(
+                    hours=5,
+                    minutes=30
+                )
+            ).strftime("%b %d-%H%M"))
         },
     )
