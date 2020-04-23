@@ -26,7 +26,7 @@
       background-color: #45a049;
     }
 
-    div {
+    .details {
       border-radius: 15px;
       background-color: #dddddd;
       padding: 20px;
@@ -53,7 +53,8 @@
       text-decoration: none;
     }
 
-    .status {
+    .status,
+    .instructions {
       text-align: center;
       padding-top: 30px;
       padding-left: 20px;
@@ -62,7 +63,7 @@
       background-color: #dddddd;
       border-radius: 15px;
       opacity: 0;
-      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
   </style>
   <head>
@@ -74,9 +75,7 @@
         if (
           !document
             .getElementById("meeting_url")
-            .value.match(
-              /https:\/\/us04web.zoom.us\/j\/\d{9,11}\?pwd=.{10,}/g
-            )
+            .value.match(/https:\/\/us04web.zoom.us\/j\/\d{9,11}\?pwd=.{10,}/g)
         ) {
           document.getElementById("status").innerText =
             "Please enter a valid link.";
@@ -89,7 +88,7 @@
     </script>
   </head>
   <body>
-    <div>
+    <div class="details">
       <form method="POST" id="form">
         <label for="meeting_url">Enter Meeting URL</label>
         <input
@@ -105,7 +104,25 @@
         />
       </form>
     </div>
-    <p id="status" class="status"></span>
+    <div style="padding-top: 30px; padding-bottom: 15px;">
+      <div class="instructions" style="opacity: 1;">
+        <b>Make sure that:</b>
+        <p>1) the meeting is still going on</p>
+        <p>2) the meeting is not locked</p>
+        <p>3) the waiting room is disabled</p>
+        <br />
+        <p>
+          <b>Note: </b>You might see an Internal Server Error at times. This
+          might be due to a lot of traffic. In such a case, try again after a
+          couple of minutes.
+        </p>
+      </div>
+    </div>
+    <p id="status" class="status"></p>
   </body>
-  <p><a class="footer" href="https://github.com/akshansh2000">© Akshansh Bhanjana</a></p>
+  <p>
+    <a class="footer" href="https://github.com/akshansh2000"
+      >© Akshansh Bhanjana</a
+    >
+  </p>
 </html>
