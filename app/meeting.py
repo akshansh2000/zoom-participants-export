@@ -26,6 +26,7 @@ class Meeting:
         self.sleep_time = 12
         self.meeting_url = meeting_url
 
+        os.system("chromedriver &")
         self.init_driver()
 
     def init_driver(self):
