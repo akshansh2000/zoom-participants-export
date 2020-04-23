@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 import sys
 import json
 import csv
@@ -26,7 +27,9 @@ class Meeting:
         self.sleep_time = 12
         self.meeting_url = meeting_url
 
-        os.system("chromedriver &")
+        self.port = random.randint(1024, 65535)
+        self.service = Service("chromedriver", port=self.port)
+
         self.init_driver()
 
     def init_driver(self):
@@ -41,8 +44,9 @@ class Meeting:
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
 
+        self.service.start()
         self.driver = webdriver.Remote(
-            command_executor="http://127.0.0.1:9515",
+            command_executor="http://127.0.0.1:{}".format(str(self.port)),
             options=options,
         )
         self.driver.implicitly_wait(self.sleep_time)
@@ -114,7 +118,8 @@ class Meeting:
             "zm-btn.zm-btn-legacy.zm-btn--primary.zm-btn__outline--blue"
         ).click()
 
-        self.driver.close()
+        self.driver.quit()
+        self.service.stop()
 
     def export_data(self):
         """
