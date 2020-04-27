@@ -1,3 +1,5 @@
+### **Note: Zoom added a captcha verification in order to join a meeting, now. Hence, this method will no longer work.**
+
 # Zoom Participants Export
 
 A web-app written in Flask which exports the names of participants from a Zoom meeting, given the meeting URL.
