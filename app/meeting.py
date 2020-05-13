@@ -30,8 +30,6 @@ class Meeting:
         self.port = random.randint(1024, 65535)
         self.service = Service("chromedriver", port=self.port)
 
-        self.init_driver()
-
     def init_driver(self):
         """
         * Initialises webdriver and sets options for headless Chrome
