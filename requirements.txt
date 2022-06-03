@@ -1,4 +1,4 @@
-bottle==0.12.18
+bottle==0.12.20
 bottle-websocket==0.2.9
 click==7.1.1
 Flask==1.1.2
